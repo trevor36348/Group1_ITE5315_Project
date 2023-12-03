@@ -90,8 +90,22 @@ app.post('/api/restaurants', function(req, res) {
 app.get('/api/restaurants', function(req, res) {
 	const page = req.query.page;
 	const perPage = req.query.perPage;
-	const borough = req.query.borough
-	// ...
+	const borough = req.query.borough;
+
+	var check = null;
+	if(borough) { check = {borough} }
+
+	const skip = (perPage * (page - 1));
+	
+	RestaurantSchema.find(check)
+		.skip(skip)
+		.limit(perPage)
+		.then(restaurants => {
+			res.json(restaurants);
+		})
+		.catch(err => {
+			res.status(500).send(err.message || 'ERROR');
+		});
 });
 
 
