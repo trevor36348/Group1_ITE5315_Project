@@ -17,6 +17,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect(database.url);
 
+// Requiring the Schema for the restaurant db
+var RestaurantSchema = require('./models/restaurantdata');
 
 // ----------------------------------------------------------------------------------------------------------------
 //	Setting up HBS engine, view engine
@@ -41,15 +43,10 @@ app.set('view engine', 'hbs');
 
 
 // ----------------------------------------------------------------------------------------------------------------
-//	Routes for 
+//	Routes with webpage
 // ----------------------------------------------------------------------------------------------------------------
 
-
-app.init({
-
-});
-
-
+/* 
 app.get('/', function(req, res) {
 	// Homepage
 });
@@ -78,10 +75,10 @@ app.put('/updateRestaurantById', function(req, res) {
 app.delete('/deleteRestaurantById', function(req, res) {
 
 });
-
+*/
 
 // ----------------------------------------------------------------------------------------------------------------
-//	Routes for web API
+//	Routes for web API 
 // ----------------------------------------------------------------------------------------------------------------
 
 
@@ -99,7 +96,7 @@ app.get('/api/restaurants', function(req, res) {
 
 
 app.get('/api/restaurants/:restaurants_id', function(req, res) {
-
+	
 });
 
 
