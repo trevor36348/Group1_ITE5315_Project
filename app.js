@@ -14,10 +14,6 @@ var path = require('path');
 const exphbs = require('express-handlebars');
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect(database.url);
-
-// Requiring the Schema for the restaurant db
-var RestaurantSchema = require('./models/restaurantdata');
 
 // ----------------------------------------------------------------------------------------------------------------
 //	Setting up HBS engine, view engine
@@ -38,12 +34,67 @@ app.set('view engine', 'hbs');
 // ----------------------------------------------------------------------------------------------------------------
 //	Additional Setup (If Necessary)
 // ----------------------------------------------------------------------------------------------------------------
+  
+//Connecting to the database
+mongoose.connect(database.url);
+
+//Setting up the Schema
+var RestaurantSchema = require('./models/restaurantdata');
+var RestaurantModule = require('./config/restaurantModule');
+
+// ----------------------------------------------------------------------------------------------------------------
+//	Routes for web API 
+// ----------------------------------------------------------------------------------------------------------------
+
+app.post('/api/restaurants', async function(req, res) {
+	try {
+	  const data = req.body;
+	  const newRestaurant = await RestaurantModule.addNewRestaurant(data);
+  
+	  console.log("Data Inserted");
+	  res.json(newRestaurant); 
+
+	} catch (err) {
+	  console.error("ERROR:", err.message);
+	  res.status(500).send(err.message);
+	}
+  });
+
+
+// need to update with module
+app.get('/api/restaurants', function(req, res) {
+	const data = req.query;
+	
+	const findRestaurant = RestaurantModule.getAllRestaurants(data)
+		.then(findRestaurant => {
+			res.json(findRestaurant);
+		})
+		.catch(err => {
+			res.status(500).send("ERROR:", err.message);
+	});
+});
+
+
+app.get('/api/restaurants/:restaurants_id', function(req, res) {
+	
+});
+
+
+app.put('/api/restaurants/:restaurants_id', function(req, res) {
+
+});
+
+
+app.delete('/api/restaurants/:restaurants_id', function(req, res) {
+
+});
 
 
 
 // ----------------------------------------------------------------------------------------------------------------
 //	Routes with webpage
 // ----------------------------------------------------------------------------------------------------------------
+
 
 /* 
 app.get('/', function(req, res) {
@@ -75,73 +126,6 @@ app.delete('/deleteRestaurantById', function(req, res) {
 
 });
 */
-
-// ----------------------------------------------------------------------------------------------------------------
-//	Routes for web API 
-// ----------------------------------------------------------------------------------------------------------------
-
-
-app.post('/api/restaurants', async function(req, res) {
-	try {
-	  const restaurant = await RestaurantSchema.create({
-		address: {
-		  building: req.body.address.building,
-		  coord: req.body.address.coord,
-		  street: req.body.address.street,
-		  zipcode: req.body.address.zipcode,
-		},
-		borough: req.body.borough,
-		cuisine: req.body.cuisine,
-		grades: req.body.grades,
-		name: req.body.name,
-		restaurant_id: req.body.restaurant_id,
-	  });
-  
-	  console.log("Data Inserted");
-	  res.json(restaurant); 
-
-	} catch (err) {
-	  console.error("ERROR:", err.message);
-	  res.status(500).send(err.message);
-	}
-  });
-
-
-app.get('/api/restaurants', function(req, res) {
-	const page = req.query.page;
-	const perPage = req.query.perPage;
-	const borough = req.query.borough;
-
-	var check = null;
-	if(borough) { check = {borough} }
-
-	const skip = (perPage * (page - 1));
-	
-	RestaurantSchema.find(check)
-		.skip(skip)
-		.limit(perPage)
-		.then(restaurants => {
-			res.json(restaurants);
-		})
-		.catch(err => {
-			res.status(500).send(err.message || 'ERROR');
-		});
-});
-
-
-app.get('/api/restaurants/:restaurants_id', function(req, res) {
-	
-});
-
-
-app.put('/api/restaurants/:restaurants_id', function(req, res) {
-
-});
-
-
-app.delete('/api/restaurants/:restaurants_id', function(req, res) {
-
-});
 
 
 // ----------------------------------------------------------------------------------------------------------------
