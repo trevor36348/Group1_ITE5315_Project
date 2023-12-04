@@ -11,7 +11,6 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 
 var path = require('path');
-var app = express();
 const exphbs = require('express-handlebars');
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -82,9 +81,30 @@ app.delete('/deleteRestaurantById', function(req, res) {
 // ----------------------------------------------------------------------------------------------------------------
 
 
-app.post('/api/restaurants', function(req, res) {
+app.post('/api/restaurants', async function(req, res) {
+	try {
+	  const restaurant = await RestaurantSchema.create({
+		address: {
+		  building: req.body.address.building,
+		  coord: req.body.address.coord,
+		  street: req.body.address.street,
+		  zipcode: req.body.address.zipcode,
+		},
+		borough: req.body.borough,
+		cuisine: req.body.cuisine,
+		grades: req.body.grades,
+		name: req.body.name,
+		restaurant_id: req.body.restaurant_id,
+	  });
+  
+	  console.log("Data Inserted");
+	  res.json(restaurant); 
 
-});
+	} catch (err) {
+	  console.error("ERROR:", err.message);
+	  res.status(500).send(err.message);
+	}
+  });
 
 
 app.get('/api/restaurants', function(req, res) {
