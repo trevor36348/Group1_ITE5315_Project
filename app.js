@@ -76,7 +76,7 @@ app.get('/api/restaurants', function(req, res) {
 
 
 app.get('/api/restaurants/:restaurants_id', function(req, res) {
-	
+
 });
 
 

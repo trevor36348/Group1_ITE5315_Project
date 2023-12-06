@@ -19,8 +19,8 @@ module.exports = {
     },
 
     getAllRestaurants: async function(query) {
-        const page = query.page;
-	    const perPage = query.perPage;
+        const page = query.page || 1;
+	    const perPage = query.perPage || 10;
 	    const borough = query.borough;
 
         var check = null;
@@ -31,5 +31,17 @@ module.exports = {
         const restaurant = await RestaurantSchema.find(check).skip(skip).limit(perPage);
 
         return restaurant;
+    },
+    
+    getRestaurantById: async function(id) {
+
+    },
+
+    updateRestaurantById: async function(id) {
+
+    },
+
+    deleteRestaurantById: async function(id) {
+
     }
 }
