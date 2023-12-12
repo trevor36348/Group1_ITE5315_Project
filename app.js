@@ -264,7 +264,7 @@ app.post('/addNewRestaurant', function(req, res) {
 		restaurant_id: parseInt(req.body.idField)
 	})
 
-	const output = RestaurantModule.addNewRestaurant(filteredUpdate)
+	const output = RestaurantModule.addNewRestaurant(newRestaurant)
 		.then(output => {
 			res.render('output', {title: "addNewRestaurant", header: "Result of addNewRestaurant:", data: output});
 		})
