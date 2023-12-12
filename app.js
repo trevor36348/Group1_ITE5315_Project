@@ -335,7 +335,7 @@ app.get('/updateRestaurantById', function(req, res) {
 	res.render('updateRestaurantById', {title: "updateRestaurantById"});
 });
 app.post('/updateRestaurantById', function(req, res) {
-	var id = req.body.idField;
+	var id = req.body._idField;
 	const newRestaurant = new RestaurantSchema({
 		address: {
 			building: req.body.buildingField,
@@ -357,7 +357,7 @@ app.post('/updateRestaurantById', function(req, res) {
 	})
 	const output = RestaurantModule.updateRestaurantById(id, newRestaurant)
 		.then(output => {
-			res.render('output', {title: "updateRestaurantById", header: "Result of updateRestaurantById:", data: output});
+			res.render('output', {title: "updateRestaurantById", header: ("Updated Restaurant with id: " + id), data: null});
 		})
 		.catch(err => {
 			console.log(err);
