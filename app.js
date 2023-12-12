@@ -235,7 +235,7 @@ app.delete('/api/restaurants/:res_id', function(req, res) {
 // ----------------------------------------------------------------------------------------------------------------
 
 
-app.get('/', auth, async(req, res) => {
+app.get('/', async(req, res) => {
 	return res.status(200).render('index', { title: 'Homepage' });
 });
 
