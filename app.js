@@ -381,7 +381,7 @@ app.post('/deleteRestaurantById', function(req, res) {
 			catch {
 				res.render('output', {title: "deleteRestaurantById", header: "Error for deleteRestaurantById:", data: null});
 			}
-			res.render('output', {title: "deleteRestaurantById", header: "Result of deleteRestaurantById:", data: findRestaurant});
+			res.render('output', {title: "deleteRestaurantById", header: ("Deleted Data for ID: "+ id), data: findRestaurant});
 		})
 		.catch(err => {
 			res.render('output', {title: "deleteRestaurantById", header: "Error for deleteRestaurantById:", data: null});
