@@ -206,9 +206,9 @@ app.put('/api/restaurants/:res_id', function(req, res) {
 	const id = req.params.res_id;
 	const data = req.body;
 
-	const updateRestaurant = RestaurantModule.getRestaurantById(id, data)
+	const updateRestaurant = RestaurantModule.updateRestaurantById(id, data)
 		.then(updateRestaurant => {
-			res.json(updateRestaurant);
+			res.json("Data Updated!");
 		})
 		.catch(err => {
 			res.status(500).send("ERROR:", err.message);
