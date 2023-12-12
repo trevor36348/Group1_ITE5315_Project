@@ -208,7 +208,7 @@ app.put('/api/restaurants/:res_id', function(req, res) {
 
 	const updateRestaurant = RestaurantModule.updateRestaurantById(id, data)
 		.then(updateRestaurant => {
-			res.status(200).send("Data Updated for: ", id);
+			res.status(200).send("Data Updated");
 		})
 		.catch(err => {
 			res.status(500).send("ERROR:", err.message);
@@ -221,7 +221,7 @@ app.delete('/api/restaurants/:res_id', function(req, res) {
 		const id = req.params.res_id;
 		RestaurantModule.deleteRestaurantById(id);
 	
-		res.status(200).send("Data Deleted for: ", id);
+		res.status(200).send("Data Deleted");
   
 	  } catch (err) {
 		console.error("ERROR:", err.message);
