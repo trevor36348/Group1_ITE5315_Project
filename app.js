@@ -1,14 +1,13 @@
 var express  = require('express');
 var mongoose = require('mongoose');
 const app = express();
-var database = require('./config/database');
+//var database = require('./config/database');
 var bodyParser = require('body-parser');         // pull information from HTML POST (express4)
 app.use(bodyParser.urlencoded({extended: true}));
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 require("dotenv").config();
-require("./config/database").connect();
 
 app.use(express.json());
 
