@@ -1,0 +1,41 @@
+<h1>{{ header }}</h1>
+
+{{#if data}}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Borough</th>
+                <th>Cuisine</th>
+                <th>Grades</th>
+                <th>Name</th>
+                <th>Restaurant ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>
+                    <ul>
+                        <li>Building: {{address.building}}</li>
+                        <li>Coord: {{address.coord.type}}</li>
+                        <li>Street: {{address.street}}</li>
+                        <li>Zipcode: {{address.zipcode}}</li>
+                    </ul>
+                </td>
+                <td>{{borough}}</td>
+                <td>{{cuisine}}</td>
+                <td>
+                    <ul>
+                        {{#each grades}}
+                        <li>Date: {{date}}, Grade: {{grade}}, Score: {{score}}</li>
+                        {{/each}}
+                    </ul>
+                </td>
+                <td>{{name}}</td>
+                <td>{{restaurant_id}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+{{/if}}

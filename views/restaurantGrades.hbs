@@ -1,0 +1,29 @@
+<form method="POST">
+    <input type="text" id="idField" name="idField" placeholder="Enter Restaurant ID">
+    <button type="submit">Search</button>
+</form>
+<h1>{{ header }}</h1>
+
+{{#if data}}
+    <p>Average Score: {{ averageScore }}</p>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Grade</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+              {{#each grades}}
+              <tr>
+                <td>{{date}}</td>
+                <td>{{grade}}</td>
+                <td>{{score}}</td>
+              </tr>
+              {{/each}}
+            {{/each}}
+        </tbody>
+    </table>
+{{/if}}
