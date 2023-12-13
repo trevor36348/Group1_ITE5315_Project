@@ -55,6 +55,6 @@ module.exports = {
     },
 
     deleteRestaurantById: async function(id) {
-        await RestaurantSchema.deleteOne( { _id: id } );
+        return RestaurantSchema.deleteOne( { _id: id } );
     }
 }

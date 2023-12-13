@@ -270,7 +270,7 @@ app.post('/addNewRestaurant', function(req, res) {
 		})
 		.catch(err => {
 			console.log(err);
-			res.render('output', {title: "addNewRestaurant", header: "Result of addNewRestaurant:", data: null});
+			res.render('output', {title: "addNewRestaurant", header: "Error with addNewRestaurant:", data: null});
 	});
 });
 
@@ -291,7 +291,7 @@ app.post('/getAllRestaurants', function(req, res) {
 			res.render('output', {title: "getAllRestaurants", header: "Result of getAllRestaurants:", data: findRestaurant});
 		})
 		.catch(err => {
-			res.render('output', {title: "getAllRestaurants", header: "Result of getAllRestaurants:", data: null});
+			res.render('output', {title: "getAllRestaurants", header: "Error with getAllRestaurants:", data: null});
 			//res.status(500).send("ERROR:", err.message);
 	});
 });
@@ -306,7 +306,7 @@ app.get('/getAllRestaurants/:page/:perPage/:borough?', async (req, res) => {
 			res.render('output', {title: "getAllRestaurants", header: "Result of getAllRestaurants:", data: findRestaurant});
 		})
 		.catch(err => {
-			res.render('output', {title: "getAllRestaurants", header: "Result of getAllRestaurants:", data: null});
+			res.render('output', {title: "getAllRestaurants", header: "Error with getAllRestaurants:", data: null});
 			//res.status(500).send("ERROR:", err.message);
 	});
 });
@@ -321,10 +321,10 @@ app.post('/getRestaurantById', function(req, res) {
 	
 	const findRestaurant = RestaurantModule.getRestaurantById(id)
 		.then(findRestaurant => {
-			res.render('output', {title: "getRestaurantById", header: "Result of getRestaurantById:", data: findRestaurant});
+			res.render('output', {title: "getRestaurantById", header: ("Result of getRestaurantById: " + id), data: findRestaurant});
 		})
 		.catch(err => {
-			res.render('output', {title: "getRestaurantById", header: "Result of getRestaurantById:", data: null});
+			res.render('output', {title: "getRestaurantById", header: "Error with getRestaurantById:", data: null});
 			//res.status(500).send("ERROR:", err.message);
 	});
 });
@@ -404,7 +404,7 @@ app.post('/restaurantGrades', function(req, res) {
 			if(!averageScore) {
 				res.render('restaurantGrades', {title: "restaurantGrades", header: "There are no scores for this ID", averageScore: null, data: null});
 			}
-			res.render('restaurantGrades', {title: "restaurantGrades", header: "Result for restaurantGrades:", averageScore: averageScore, data: restaurant});
+			res.render('restaurantGrades', {title: "restaurantGrades", header: ("Result for restaurantGrades:" + id), averageScore: averageScore, data: restaurant});
 		})
 		.catch(err => {
 			res.render('restaurantGrades', {title: "restaurantGrades", header: "Error for restaurantGrades:", data: null});
